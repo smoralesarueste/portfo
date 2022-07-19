@@ -1,6 +1,5 @@
 import os
 
-from helpers import append_answer, send_email
 from flask import Flask, render_template, url_for, request, redirect, session
 
 
@@ -18,12 +17,3 @@ def main_page():
 def html_page(page_name): 
 	return render_template(page_name)
 
-@app.route("/submit_form", methods = ["POST", "GET"])
-def submit_form(): 
-	if request.method == "POST": 
-		data = request.form.to_dict()
-		if append_answer(SUBMITS_FILE, data): 
-			# send_email(data)
-			session["name"] = data["name"]
-			return redirect("/contact_thankyou.html")
-	return "what happened?"
